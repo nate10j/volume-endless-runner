@@ -13,7 +13,7 @@ navigator.mediaDevices.getUserMedia({ audio: true })
 		init();
 	})
 	.catch(err => {
-		alert("Please allow microphone access in your browser and computer privacy settings.");
+		alert("For this game to work, Please allow microphone access in your browser and computer privacy settings.");
 	});
 
 function get_volume() {
