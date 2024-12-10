@@ -2,7 +2,7 @@
 Please ensure microphone access for computer settings and in browser permissions.
 Make a sound to jump
 
-<img width="818" alt="Screenshot 2024-12-10 at 5 54 58 PM" src="https://github.com/user-attachments/assets/cac0d98e-c18f-490e-8cb5-c4be2ed3ef1a">
+<img width="510" alt="Screenshot 2024-12-10 at 5 54 11 PM" src="https://github.com/user-attachments/assets/a6f0cae8-797e-407d-8569-d1c66d02dbb5">
 
 <br>
 
