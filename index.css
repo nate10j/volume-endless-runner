@@ -1,0 +1,8 @@
+.settings-container {
+	display: flex;
+	flex-direction: row;
+}
+
+.slider-container {
+	padding: 10px;
+}

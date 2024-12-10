@@ -22,11 +22,13 @@ function get_volume() {
 	analyser.getByteFrequencyData(dataArray);
 	const average = dataArray.reduce((a, b) => a + b) / dataArray.length;
 
-	return average;
+	return average * inputSensitivityElement.value;
 }
 
 const canvas = document.getElementById("canvas")
 const ctx = canvas.getContext("2d");
+const thresholdElement = document.getElementById("threshold");
+const inputSensitivityElement = document.getElementById("sensitivity");
 
 let gameActive = true;
 
@@ -94,11 +96,11 @@ function update() {
 		player.speedY = 0;
 		player.y = -250;
 
-		if (volume > 40) {
+		if (volume > 40 * thresholdElement.value) {
 			player.speedY = 14;
-		} else if (volume > 30) {
+		} else if (volume > 30 * thresholdElement.value) {
 			player.speedY = 12;
-		} else if (volume > 20) {
+		} else if (volume > 20 * thresholdElement.value) {
 			player.speedY = 11;
 		}
 	}
