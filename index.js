@@ -30,7 +30,7 @@ const ctx = canvas.getContext("2d");
 const thresholdElement = document.getElementById("threshold");
 const inputSensitivityElement = document.getElementById("sensitivity");
 
-let gameActive = true;
+let gameActive;
 
 const player = {
 	y: -50,
@@ -64,8 +64,9 @@ function gameover() {
 	clearInterval(spawnObstacle);
 	gameActive = false;
 	alert("game over!");
-	init();
-}
+	setTimeout(() => {
+		init();
+	}, 1000)}
 
 function render() {
 	ctx.fillStyle = "#fff"
@@ -89,7 +90,7 @@ function render() {
 function update() {
 	volume = get_volume();
 
-	player.speedY -= 0.5;
+	player.speedY -= 2;
 	player.y += player.speedY;
 
 	if ( player.y < -250 ) {
@@ -97,20 +98,21 @@ function update() {
 		player.y = -250;
 
 		if (volume > 40 * thresholdElement.value) {
-			player.speedY = 14;
+			player.speedY = 28;
 		} else if (volume > 30 * thresholdElement.value) {
-			player.speedY = 12;
+			player.speedY = 24;
 		} else if (volume > 20 * thresholdElement.value) {
-			player.speedY = 11;
+			player.speedY = 22;
 		}
 	}
 
 	for (i in obstacles) {
-		obstacles[i].x -= 5;
+		obstacles[i].x -= 12;
 
 		if (obstacles[i].x < 100 && obstacles[i].x + obstacles[i].width > 50) {
 			if (player.y * -1 >= 250 - obstacles[i].height ) {
 				gameover();
+				return;
 			}
 		}
 
@@ -121,9 +123,8 @@ function update() {
 }
 
 function gameloop() {
+	if (!gameActive) { return }
 	update();
 	render();
-	if (!gameActive) return;
 	window.requestAnimationFrame(gameloop);
 }
-window.requestAnimationFrame(gameloop);
