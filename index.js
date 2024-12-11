@@ -14,6 +14,7 @@ navigator.mediaDevices.getUserMedia({ audio: true })
 	})
 	.catch(err => {
 		alert("For this game to work, Please allow microphone access in your browser and computer privacy settings.");
+		console.log(err)
 	});
 
 function get_volume() {
@@ -56,7 +57,7 @@ function startSpawning() {
 function init() {
 	gameActive = true;
 	startSpawning();
-	gameloop();
+	window.requestAnimationFrame(gameloop);
 }
 
 function gameover() {
@@ -90,8 +91,8 @@ function render() {
 function update() {
 	volume = get_volume();
 
-	player.speedY -= 2;
-	player.y += player.speedY;
+	player.speedY -= 2 * delta_time;
+	player.y += player.speedY * delta_time;
 
 	if ( player.y < -250 ) {
 		player.speedY = 0;
@@ -107,7 +108,7 @@ function update() {
 	}
 
 	for (i in obstacles) {
-		obstacles[i].x -= 12;
+		obstacles[i].x -= 12 * delta_time;
 
 		if (obstacles[i].x < 100 && obstacles[i].x + obstacles[i].width > 50) {
 			if (player.y * -1 >= 250 - obstacles[i].height ) {
@@ -122,9 +123,17 @@ function update() {
 	}
 }
 
-function gameloop() {
+let delta_time;
+let previousTime = 0;
+
+function gameloop(timestamp) {
 	if (!gameActive) { return }
+
+	delta_time = (timestamp - previousTime) / (1000 / 60);
+	previousTime = timestamp;
+
 	update();
 	render();
+
 	window.requestAnimationFrame(gameloop);
 }
