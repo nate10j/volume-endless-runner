@@ -1,4 +1,4 @@
-## Volume Endless Runner
+## Volume Endless Runner 🔊
 Please ensure microphone access for computer settings and in browser permissions.
 Make a sound to jump
 
